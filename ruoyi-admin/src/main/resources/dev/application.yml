@@ -13,12 +13,12 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件上传路径
-  profile: D:/profile/
+  profile: /tmp/ruoyi/profile/
 
 # 开发环境配置
 server:
   # 服务端口
-  port: 80
+  port: 8088
   servlet:
     # 项目contextPath
     context-path: /
@@ -67,9 +67,9 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://localhost:3306/ry?useUnicode=true&characterEncoding=utf8&useTimezone=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull&useSSL=true
+        url: jdbc:mysql://1.117.80.229:3306/ry?useUnicode=true&characterEncoding=utf8&useTimezone=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull&useSSL=true
         username: root
-        password: root
+        password: Mjw940610...
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
@@ -178,3 +178,15 @@ thread:
     keepAliveSeconds: 2000
     maxPoolSize: 100
     corePoolSize: 10
+
+
+# 代码生成
+gen:
+  # 作者
+  author: junwen
+  # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
+  packageName: com.ruoyi.hsz
+  # 自动去除表前缀，默认是true
+  autoRemovePre: false
+  # 表前缀(类名不会包含表前缀)
+  tablePrefix: hsz_

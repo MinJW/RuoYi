@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hsz.mapper.HszGnApiInfoMapper">
+
+    <resultMap type="HszGnApiInfo" id="HszGnApiInfoResult">
+                    <result property="id" column="id"/>
+                    <result property="url" column="url"/>
+                    <result property="project" column="project"/>
+                    <result property="android" column="android"/>
+                    <result property="android_pro" column="android_pro"/>
+                    <result property="android_cloud" column="android_cloud"/>
+                    <result property="ios_red_cloud" column="ios_red_cloud"/>
+                    <result property="ios_red_rain" column="ios_red_rain"/>
+                    <result property="h5" column="h5"/>
+                    <result property="pc" column="pc"/>
+                    <result property="pc_pro" column="pc_pro"/>
+                    <result property="pr_cloud" column="pr_cloud"/>
+                    <result property="recod_url" column="recod_url"/>
+                    <result property="descript" column="descript"/>
+            </resultMap>
+
+    <sql id="selectHszGnApiInfoVo">
+        select id, url, project, android, android_pro, android_cloud, ios_red_cloud, ios_red_rain, h5, pc, pc_pro, pr_cloud, recod_url, descript from hsz_gn_api_info
+    </sql>
+
+    <select id="selectHszGnApiInfoList" parameterType="HszGnApiInfo" resultMap="HszGnApiInfoResult">
+        <include refid="selectHszGnApiInfoVo"/>
+        <where>
+                            <if test="id != null ">and id = #{id}
+                </if>
+                            <if test="url != null  and url != '' ">and url = #{url}
+                </if>
+                            <if test="project != null  and project != '' ">and project = #{project}
+                </if>
+                            <if test="android != null ">and android = #{android}
+                </if>
+                            <if test="android_pro != null ">and android_pro = #{android_pro}
+                </if>
+                            <if test="android_cloud != null ">and android_cloud = #{android_cloud}
+                </if>
+                            <if test="ios_red_cloud != null ">and ios_red_cloud = #{ios_red_cloud}
+                </if>
+                            <if test="ios_red_rain != null ">and ios_red_rain = #{ios_red_rain}
+                </if>
+                            <if test="h5 != null ">and h5 = #{h5}
+                </if>
+                            <if test="pc != null ">and pc = #{pc}
+                </if>
+                            <if test="pc_pro != null ">and pc_pro = #{pc_pro}
+                </if>
+                            <if test="pr_cloud != null ">and pr_cloud = #{pr_cloud}
+                </if>
+                            <if test="recod_url != null  and recod_url != '' ">and recod_url = #{recod_url}
+                </if>
+                            <if test="descript != null  and descript != '' ">and descript = #{descript}
+                </if>
+                    </where>
+    </select>
+
+    <select id="selectHszGnApiInfoById" parameterType="Integer" resultMap="HszGnApiInfoResult">
+        <include refid="selectHszGnApiInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertHszGnApiInfo" parameterType="HszGnApiInfo"            useGeneratedKeys="true" keyProperty="id">
+        insert into hsz_gn_api_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                                                                            <if test="url != null  and url != ''  ">url,
+                    </if>
+                                                                <if test="project != null  and project != ''  ">project,
+                    </if>
+                                                                <if test="android != null  ">android,
+                    </if>
+                                                                <if test="android_pro != null  ">android_pro,
+                    </if>
+                                                                <if test="android_cloud != null  ">android_cloud,
+                    </if>
+                                                                <if test="ios_red_cloud != null  ">ios_red_cloud,
+                    </if>
+                                                                <if test="ios_red_rain != null  ">ios_red_rain,
+                    </if>
+                                                                <if test="h5 != null  ">h5,
+                    </if>
+                                                                <if test="pc != null  ">pc,
+                    </if>
+                                                                <if test="pc_pro != null  ">pc_pro,
+                    </if>
+                                                                <if test="pr_cloud != null  ">pr_cloud,
+                    </if>
+                                                                <if test="recod_url != null  and recod_url != ''  ">recod_url,
+                    </if>
+                                                                <if test="descript != null  and descript != ''  ">descript,
+                    </if>
+                                    </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                                                                            <if test="url != null  and url != ''  ">#{url},
+                    </if>
+                                                                <if test="project != null  and project != ''  ">#{project},
+                    </if>
+                                                                <if test="android != null  ">#{android},
+                    </if>
+                                                                <if test="android_pro != null  ">#{android_pro},
+                    </if>
+                                                                <if test="android_cloud != null  ">#{android_cloud},
+                    </if>
+                                                                <if test="ios_red_cloud != null  ">#{ios_red_cloud},
+                    </if>
+                                                                <if test="ios_red_rain != null  ">#{ios_red_rain},
+                    </if>
+                                                                <if test="h5 != null  ">#{h5},
+                    </if>
+                                                                <if test="pc != null  ">#{pc},
+                    </if>
+                                                                <if test="pc_pro != null  ">#{pc_pro},
+                    </if>
+                                                                <if test="pr_cloud != null  ">#{pr_cloud},
+                    </if>
+                                                                <if test="recod_url != null  and recod_url != ''  ">#{recod_url},
+                    </if>
+                                                                <if test="descript != null  and descript != ''  ">#{descript},
+                    </if>
+                                    </trim>
+    </insert>
+
+    <update id="updateHszGnApiInfo" parameterType="HszGnApiInfo">
+        update hsz_gn_api_info
+        <trim prefix="SET" suffixOverrides=",">
+                                                                            <if test="url != null  and url != ''  ">url = #{url},
+                    </if>
+                                                                <if test="project != null  and project != ''  ">project = #{project},
+                    </if>
+                                                                <if test="android != null  ">android = #{android},
+                    </if>
+                                                                <if test="android_pro != null  ">android_pro = #{android_pro},
+                    </if>
+                                                                <if test="android_cloud != null  ">android_cloud = #{android_cloud},
+                    </if>
+                                                                <if test="ios_red_cloud != null  ">ios_red_cloud = #{ios_red_cloud},
+                    </if>
+                                                                <if test="ios_red_rain != null  ">ios_red_rain = #{ios_red_rain},
+                    </if>
+                                                                <if test="h5 != null  ">h5 = #{h5},
+                    </if>
+                                                                <if test="pc != null  ">pc = #{pc},
+                    </if>
+                                                                <if test="pc_pro != null  ">pc_pro = #{pc_pro},
+                    </if>
+                                                                <if test="pr_cloud != null  ">pr_cloud = #{pr_cloud},
+                    </if>
+                                                                <if test="recod_url != null  and recod_url != ''  ">recod_url = #{recod_url},
+                    </if>
+                                                                <if test="descript != null  and descript != ''  ">descript = #{descript},
+                    </if>
+                                    </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHszGnApiInfoById" parameterType="Integer">
+        delete from hsz_gn_api_info where id = #{id}
+    </delete>
+
+    <delete id="deleteHszGnApiInfoByIds" parameterType="String">
+        delete from hsz_gn_api_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

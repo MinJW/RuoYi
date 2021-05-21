@@ -98,7 +98,8 @@ public class GenServiceImpl implements IGenService {
         // 查询列信息
         List<ColumnInfo> columns = genMapper.selectTableColumnsByName(tableName);
         // 表名转换成Java属性名
-        String className = GenUtils.tableToJava(table.getTableName());
+        //String className = GenUtils.tableToJava(table.getTableName());
+        String className = "HszGnApiInfo";
         table.setClassName(className);
         table.setClassname(StrUtil.lowerFirst(className));
         // 列信息
