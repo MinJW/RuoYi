@@ -15,15 +15,27 @@
 							</li>
 
 							<li>
-								项目：<input type="text" name="project"/>
+								所属项目：
+								<select name="project" th:with="type=${@dict.getType('hsz_project')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
 
 							<li>
-								安卓：<input type="text" name="android"/>
+								安卓：
+								<select name="android" th:with="type=${@dict.getType('sys_hsz_api_use')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
 
 							<li>
-								安卓专业版：<input type="text" name="android_pro"/>
+								安卓专业版：
+								<select name="android_pro" th:with="type=${@dict.getType('sys_hsz_api_use')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
 
 							<li>
@@ -54,13 +66,13 @@
 								pc云控：<input type="text" name="pr_cloud"/>
 							</li>
 
-							<li>
+							<!--<li>
 								重构地址：<input type="text" name="recod_url"/>
 							</li>
 
 							<li>
 								描述：<input type="text" name="descript"/>
-							</li>
+							</li>-->
 
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -94,6 +106,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('hsz:hszGnApiInfo:edit')}]];
         var removeFlag = [[${@permission.hasPermi('hsz:hszGnApiInfo:remove')}]];
+		var hszUse = [[${@dict.getType('sys_hsz_api_use')}]];
         var prefix = ctx + "hsz/hszGnApiInfo";
 
         $(function() {
@@ -120,18 +133,27 @@
 				},
 				{
 					field : 'project', 
-					title : '项目',
+					title : '所属项目',
+					sortable: true
+				},
+				{
+					field : 'fifteen_req_num',
+					title : '15天请求量',
 					sortable: true
 				},
 				{
 					field : 'android', 
 					title : '安卓',
-					sortable: true
+					formatter: function(value, row, index) {
+						return $.table.selectDictLabel(hszUse, value);
+					}
 				},
 				{
 					field : 'android_pro', 
 					title : '安卓专业版',
-					sortable: true
+					formatter: function(value, row, index) {
+						return $.table.selectDictLabel(hszUse, value);
+					}
 				},
 				{
 					field : 'android_cloud', 
@@ -168,7 +190,7 @@
 					title : 'pc云控',
 					sortable: true
 				},
-				{
+				/*{
 					field : 'recod_url', 
 					title : '重构地址',
 					sortable: true
@@ -177,7 +199,7 @@
 					field : 'descript', 
 					title : '描述',
 					sortable: true
-				},
+				},*/
 		        {
 		            title: '操作',
 		            align: 'center',

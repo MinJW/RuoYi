@@ -1,7 +1,16 @@
 package com.ruoyi.web.controller.hsz;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
+import cn.hutool.core.util.ObjectUtil;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -114,6 +123,58 @@ public class HszGnApiInfoController extends BaseController {
     @ResponseBody
     public AjaxResult remove(String ids) {
         return toAjax(hszGnApiInfoService.deleteHszGnApiInfoByIds(ids));
+    }
+
+
+    @RequestMapping("/build")
+    @ResponseBody
+    public String build() throws Exception {
+        FileInputStream excelFileInputStream = new FileInputStream("C:\\Users\\junwen\\Desktop\\redfinger-gn 接口整理.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(excelFileInputStream);
+        excelFileInputStream.close();
+
+        List<HszGnApiInfo> infoList = new ArrayList<>();
+        XSSFSheet sheet = workbook.getSheetAt(2);
+        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+            HszGnApiInfo info = new HszGnApiInfo();
+            // XSSFRow 代表一行数据
+            XSSFRow row = sheet.getRow(rowIndex);
+            if (row == null) {
+                continue;
+            }
+
+
+            //设置单元格类型
+            XSSFCell urlCell = row.getCell(0);
+            XSSFCell numCell = row.getCell(1);
+            XSSFCell androidCell = row.getCell(2);
+            XSSFCell androidProCell = row.getCell(3);
+
+            if(urlCell == null || numCell == null || androidCell == null || androidProCell == null ){
+                continue;
+            }
+
+            urlCell.setCellType(CellType.STRING);
+            numCell.setCellType(CellType.STRING);
+            androidCell.setCellType(CellType.STRING);
+            androidProCell.setCellType(CellType.STRING);
+
+
+            info.setUrl(urlCell.getStringCellValue());
+            info.setProject(numCell.getStringCellValue());
+            info.setAndroid(Integer.parseInt(androidCell.getStringCellValue()));
+            info.setAndroid_pro(Integer.parseInt(androidProCell.getStringCellValue()));
+
+
+            infoList.add(info);
+        }
+
+        workbook.close();
+        System.out.println(infoList);
+        for(HszGnApiInfo hszGnApiInfo : infoList){
+            int i = hszGnApiInfoService.insertHszGnApiInfo(hszGnApiInfo);
+        }
+        return "OK";
     }
 
 }
