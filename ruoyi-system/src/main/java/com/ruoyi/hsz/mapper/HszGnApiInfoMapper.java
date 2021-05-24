@@ -58,4 +58,6 @@ public interface HszGnApiInfoMapper {
      */
     public int deleteHszGnApiInfoByIds(String[] ids);
 
+    int updateDescript(HszGnApiInfo hszGnApiInfo);
+
 }

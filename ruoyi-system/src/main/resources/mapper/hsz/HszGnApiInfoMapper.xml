@@ -180,6 +180,10 @@
         where id = #{id}
     </update>
 
+    <update id="updateDescript" parameterType="HszGnApiInfo">
+        update hsz_gn_api_info set descript = #{descript} where url = #{url} and fifteen_req_num > 0
+    </update>
+
     <delete id="deleteHszGnApiInfoById" parameterType="Integer">
         delete
         from hsz_gn_api_info

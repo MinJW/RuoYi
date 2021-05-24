@@ -2,6 +2,7 @@ package com.ruoyi.common.utils.file;
 
 import com.ruoyi.common.support.CharsetKit;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
@@ -9,6 +10,8 @@ import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 文件处理工具类
@@ -104,5 +107,37 @@ public class FileUtils {
             filename = URLEncoder.encode(filename, CharsetKit.UTF8);
         }
         return filename;
+    }
+
+    public static List<String> readLine2List(String filePah){
+
+        List<String> urls = new ArrayList<>();
+        File file = new File(filePah);
+        FileInputStream fin = null;
+        BufferedReader bfr;
+        try {
+            fin = new FileInputStream(file);
+            bfr = new BufferedReader(new InputStreamReader(fin));
+            String str;
+            while((str=bfr.readLine()) != null) {
+                if(StringUtils.hasText(str)){
+                    urls.add(str);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fin.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return urls;
+
     }
 }

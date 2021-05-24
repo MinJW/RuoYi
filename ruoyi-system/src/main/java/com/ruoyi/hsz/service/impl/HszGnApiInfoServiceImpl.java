@@ -75,4 +75,8 @@ public class HszGnApiInfoServiceImpl implements IHszGnApiInfoService {
         return hszGnApiInfoMapper.deleteHszGnApiInfoByIds(Convert.toStrArray(ids));
     }
 
+    public int updateDescript(HszGnApiInfo hszGnApiInfo){
+        return hszGnApiInfoMapper.updateDescript(hszGnApiInfo);
+    }
+
 }

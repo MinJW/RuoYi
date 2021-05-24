@@ -50,4 +50,5 @@ public interface IHszGnApiInfoService {
      */
     public int deleteHszGnApiInfoByIds(String ids);
 
+    int updateDescript(HszGnApiInfo hszGnApiInfo);
 }

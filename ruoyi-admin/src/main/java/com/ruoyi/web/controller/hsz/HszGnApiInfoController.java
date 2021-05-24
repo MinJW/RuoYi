@@ -3,9 +3,12 @@ package com.ruoyi.web.controller.hsz;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.ruoyi.common.utils.file.FileUtils;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -125,8 +128,28 @@ public class HszGnApiInfoController extends BaseController {
         return toAjax(hszGnApiInfoService.deleteHszGnApiInfoByIds(ids));
     }
 
-
     @RequestMapping("/build")
+    @ResponseBody
+    public String build() throws Exception {
+        HszGnApiInfo info = new HszGnApiInfo();
+
+        List<String> list = FileUtils.readLine2List("C:\\Users\\junwen\\Desktop\\api.txt");
+        Map<String,String> map = new HashMap<>(list.size());
+        for(String s : list){
+            String[] split = s.split("\t");
+            if(split.length == 2){
+                System.out.println(split[0] + " ==> " + split[1]);
+                info.setUrl("/fingerauth"+split[1]);
+                info.setDescript(split[0]);
+                int i = hszGnApiInfoService.updateDescript(info);
+                System.out.println("修改" + split[1] + " ==> " + i);
+            }
+        }
+        return "OK";
+    }
+
+
+    /*@RequestMapping("/build")
     @ResponseBody
     public String build() throws Exception {
         FileInputStream excelFileInputStream = new FileInputStream("C:\\Users\\junwen\\Desktop\\redfinger-gn 接口整理.xlsx");
@@ -175,6 +198,6 @@ public class HszGnApiInfoController extends BaseController {
             int i = hszGnApiInfoService.insertHszGnApiInfo(hszGnApiInfo);
         }
         return "OK";
-    }
+    }*/
 
 }
