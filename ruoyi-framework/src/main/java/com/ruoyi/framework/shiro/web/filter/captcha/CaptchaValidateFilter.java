@@ -54,7 +54,9 @@ public class CaptchaValidateFilter extends AccessControlFilter {
     private boolean validateResponse(String validateCode) {
         Object obj = ShiroUtils.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         String code = String.valueOf(obj != null ? obj : "");
-        return !StrUtil.isEmpty(validateCode) && validateCode.equalsIgnoreCase(code);
+        //return !StrUtil.isEmpty(validateCode) && validateCode.equalsIgnoreCase(code);
+        //取消验证码
+        return true;
     }
 
     @Override
