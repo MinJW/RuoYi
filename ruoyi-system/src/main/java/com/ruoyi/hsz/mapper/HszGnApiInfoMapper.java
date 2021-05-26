@@ -1,6 +1,8 @@
 package com.ruoyi.hsz.mapper;
 
 import com.ruoyi.hsz.domain.HszGnApiInfo;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -60,4 +62,5 @@ public interface HszGnApiInfoMapper {
 
     int updateDescript(HszGnApiInfo hszGnApiInfo);
 
+    int updateClient(@Param("urls") List<String> urls);
 }

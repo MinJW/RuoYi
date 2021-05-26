@@ -20,7 +20,7 @@ public class HszGnApiInfo extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Excel(name = "参数主键")
+    //@Excel(name = "参数主键")
     @ApiModelProperty(value = "", name = "id")
     private Integer id;
 
@@ -28,7 +28,7 @@ public class HszGnApiInfo extends BaseEntity {
     @ApiModelProperty(value = "接口地址", name = "url")
     private String url;
 
-    @Excel(name = "所属项目")
+    //@Excel(name = "所属项目")
     @ApiModelProperty(value = "所属项目", name = "project")
     private String project;
 
@@ -40,15 +40,15 @@ public class HszGnApiInfo extends BaseEntity {
     @ApiModelProperty(value = "安卓专业版", name = "android_pro")
     private Integer android_pro;
 
-    @Excel(name = "安卓云控")
+    //@Excel(name = "安卓云控")
     @ApiModelProperty(value = "安卓云控", name = "android_cloud")
     private Integer android_cloud;
 
-    @Excel(name = "红云")
+    //@Excel(name = "红云")
     @ApiModelProperty(value = "红云", name = "ios_red_cloud")
     private Integer ios_red_cloud;
 
-    @Excel(name = "红雨")
+    //@Excel(name = "红雨")
     @ApiModelProperty(value = "红雨", name = "ios_red_rain")
     private Integer ios_red_rain;
 
@@ -64,15 +64,15 @@ public class HszGnApiInfo extends BaseEntity {
     @ApiModelProperty(value = "pc专业版", name = "pc_pro")
     private Integer pc_pro;
 
-    @Excel(name = "pc云控")
+    //@Excel(name = "pc云控")
     @ApiModelProperty(value = "pc云控", name = "pr_cloud")
     private Integer pr_cloud;
 
-    @Excel(name = "重构地址")
+    //@Excel(name = "重构地址")
     @ApiModelProperty(value = "重构地址", name = "recod_url")
     private String recod_url;
 
-    @Excel(name = "描述")
+    //@Excel(name = "描述")
     @ApiModelProperty(value = "描述", name = "descript")
     private String descript;
 

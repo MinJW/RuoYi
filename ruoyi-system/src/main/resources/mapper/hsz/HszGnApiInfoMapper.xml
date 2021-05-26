@@ -197,4 +197,11 @@
         </foreach>
     </delete>
 
+    <update id="updateClient" parameterType="String">
+        update hsz_gn_api_info set pc_pro = '1' WHERE url IN
+        <foreach item="url" collection="urls" open="(" separator="," close=")">
+            #{url}
+        </foreach>
+    </update>
+
 </mapper>

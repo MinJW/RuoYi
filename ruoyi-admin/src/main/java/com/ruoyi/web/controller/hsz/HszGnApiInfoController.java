@@ -1,14 +1,15 @@
 package com.ruoyi.web.controller.hsz;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.ruoyi.common.utils.file.FileUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -128,10 +129,19 @@ public class HszGnApiInfoController extends BaseController {
         return toAjax(hszGnApiInfoService.deleteHszGnApiInfoByIds(ids));
     }
 
+    @RequestMapping("/script")
+    @ResponseBody
+    public String script() throws Exception {
+
+        List<String> list = FileUtils.readLine2List("C:\\Users\\junwen\\Desktop\\api.txt");
+        hszGnApiInfoService.updateClient(list);
+        return "OK";
+    }
+
     @RequestMapping("/build")
     @ResponseBody
     public String build() throws Exception {
-        HszGnApiInfo info = new HszGnApiInfo();
+        /*HszGnApiInfo info = new HszGnApiInfo();
 
         List<String> list = FileUtils.readLine2List("C:\\Users\\junwen\\Desktop\\api.txt");
         Map<String,String> map = new HashMap<>(list.size());
@@ -145,6 +155,18 @@ public class HszGnApiInfoController extends BaseController {
                 System.out.println("修改" + split[1] + " ==> " + i);
             }
         }
+        return "OK";*/
+
+        /*List<HszGnApiInfo> list = hszGnApiInfoService.selectHszGnApiInfoList(new HszGnApiInfo());
+        ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream(new File("C:\\Users\\junwen\\Desktop\\api")));
+        oo.writeObject(list);
+        System.out.println("Person对象序列化成功！");
+        oo.close();*/
+
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\junwen\\Desktop\\api"));
+        List<HszGnApiInfo> l = (List<HszGnApiInfo>) ois.readObject();
+        System.out.println(l);
+        l.clear();
         return "OK";
     }
 
